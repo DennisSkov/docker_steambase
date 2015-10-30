@@ -19,6 +19,7 @@ RUN wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
 RUN tar -xvzf steamcmd_linux.tar.gz
 RUN chown -R steam:steam /home/steam/steamcmd
 RUN chown -R steam:steam /opt/steam
+ADD install_steam_app /usr/local/bin/install_steam_app
 
 # Switch over to the steam user for the rest
 USER steam
