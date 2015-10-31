@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "Installing mod ID: $2 for app ID $1"
+/home/steam/steamcmd/steamcmd.sh  +login anonymous +workshop_download_item $1 $2 validate +quit
+
+while [ $? -ne 0 ]
+do
+echo "Install failed... Retrying"
+/home/steam/steamcmd/steamcmd.sh  +login anonymous +workshop_download_item $1 $2 validate +quit
+done
+
+echo "Finished!"

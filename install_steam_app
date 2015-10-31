@@ -1,12 +1,16 @@
 #!/bin/bash
-echo "Installing app ID $1 to '$2'"
-/home/steam/steamcmd/steamcmd.sh  +login anonymous +force_install_dir "$2" +app_update $1 validate +quit
+if [ $2 ]
+  then
+   INSTALL_DIR="$2"
+   FORCE_INSTALL="+force_install_dir"
+fi
+
+/home/steam/steamcmd/steamcmd.sh  +login anonymous $FORCE_INSTALL $INSTALL_DIR  +app_update $1 validate +quit
 
 while [ $? -ne 0 ]
 do
 echo "Install failed... Retrying"
-/home/steam/steamcmd/steamcmd.sh  +login anonymous +force_install_dir "$2" +app_update $1 validate +quit
+/home/steam/steamcmd/steamcmd.sh  +login anonymous $FORCE_INSTALL $INSTALL_DIR +app_update $1 validate +quit
 done
 
 echo "Finished!"
-

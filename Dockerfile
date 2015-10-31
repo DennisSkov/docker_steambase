@@ -21,8 +21,9 @@ RUN rm steamcmd_linux.tar.gz
 RUN chown -R steam:steam /home/steam/steamcmd
 RUN chown -R steam:steam /opt/steam
 
-# Install our helper tool
+# Install our helper tools
 ADD install_steam_app /usr/local/bin/install_steam_app
+ADD install_steam_mod /usr/local/bin/install_steam_mod
 
 # Switch over to the steam user for the rest
 USER steam
