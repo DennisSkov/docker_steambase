@@ -9,4 +9,5 @@ if [ -z $DOCKER_STEAM_TAG ]
     DOCKER_STEAM_TAG="jdonavan/steambase"
 fi
 
-docker run --net="bridge" -i -t $DOCKER_STEAM_TAG /bin/bash
+docker run --net="bridge" -v ~/.ark_inabox/workshop:/opt/steam/workshop -v  ~/.ark_inabox/mods:/opt/steam/mods -i -t $DOCKER_STEAM_TAG /bin/bash
+

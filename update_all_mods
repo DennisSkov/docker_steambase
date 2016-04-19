@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+#Dir.glob('/opt/steam/mods/*').map{ |f| File.basename(f)}.each do |modid|
+#  puts "updating #{modid}"
+#  system "install_steam_mod 346110 #{modid}"
+#end
+
+
+script = ["@ShutdownOnFailedCommand 1\n@NoPromptForPassword 1\nlogin anonymous"]
+
+Dir.glob('/opt/steam/mods/*').map{ |f| File.basename(f)}.each do |modid|
+  script << "workshop_download_item 346110 #{modid} validate"
+end
+
+script << 'quit'
+script_text = script.join( "\n")
+
+File.open('/tmp/mod_update.steam', 'w') { |file| file.write(script_text) }
+
+system '/home/steam/steamcmd/steamcmd.sh +runscript /tmp/mod_update.steam'
